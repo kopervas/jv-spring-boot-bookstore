@@ -30,13 +30,6 @@ public class BookServiceImpl implements BookService {
         return bookMapper.toDto(bookRepository.save(book));
     }
 
-/*    @Override
-    public List<BookDto> findAll() {
-        return bookRepository.findAll().stream()
-                .map(bookMapper::toDto)
-                .toList();
-    }*/
-
     @Override
     public Page<BookDto> findAll(Pageable pageable) {
         return bookRepository.findAll(pageable)
