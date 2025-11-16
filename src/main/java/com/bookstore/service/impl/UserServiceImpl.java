@@ -1,6 +1,5 @@
 package com.bookstore.service.impl;
 
-import com.bookstore.dto.UserDto;
 import com.bookstore.dto.UserRegistrationRequestDto;
 import com.bookstore.dto.UserResponseDto;
 import com.bookstore.exception.RegistrationException;
@@ -9,7 +8,6 @@ import com.bookstore.model.User;
 import com.bookstore.repository.UserRepository;
 import com.bookstore.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -22,21 +20,15 @@ public class UserServiceImpl  implements UserService {
     @Override
     public UserResponseDto register(UserRegistrationRequestDto requestDto)
             throws RegistrationException {
-        if (userRepository.findByEmail(requestDto.getEmail()).isPresent()) {
-            throw new RegistrationException("Can't register user");
+        if (userRepository.existsByEmail(requestDto.getEmail())) {
+            throw new RegistrationException(("Can't register user: " +
+                    "email %s is already taken").formatted(requestDto.getEmail()));
         }
-        User user = new User();
-        user.setEmail(requestDto.getEmail());
-        user.setPassword(requestDto.getPassword());
-        user.setShippingAddress(requestDto.getShippingAddress());
-        User savedUser = userRepository.save(user);
-        return userMapper.toUserResponse(savedUser);
-    }
 
-    @Override
-    public Page<UserDto> findAll(Pageable pageable) {
-        return userRepository.findAll(pageable)
-                .map(userMapper::toDto);
+        User user = userMapper.toEntity(requestDto);
+
+        userRepository.save(user);
+        return userMapper.toUserResponse(user);
     }
 
 }

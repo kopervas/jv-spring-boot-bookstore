@@ -6,29 +6,32 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
 @Entity
-@Getter
-@Setter
-@Table(name = "users")
+@Table(name = "`users`")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true, nullable = false)
+
+    @Column(nullable = false, unique = true)
     private String email;
+
     @Column(unique = true, nullable = false)
     private String password;
+
     @Column(nullable = false)
     private String firstName;
+
     @Column(nullable = false)
     private String lastName;
-    @Column
+
     private String shippingAddress;
 
-    public boolean isPresent() {
-        return true;
-    }
+    @Column(nullable = false)
+    public boolean isDeleted = false;
 }

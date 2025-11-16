@@ -1,7 +1,7 @@
 package com.bookstore.mapper;
 
 import com.bookstore.config.MapperConfig;
-import com.bookstore.dto.UserDto;
+import com.bookstore.dto.UserRegistrationRequestDto;
 import com.bookstore.dto.UserResponseDto;
 import com.bookstore.model.User;
 import org.mapstruct.Mapper;
@@ -10,5 +10,5 @@ import org.mapstruct.Mapper;
 public interface UserMapper {
     UserResponseDto toUserResponse (User user);
 
-    UserDto toDto (User user);
+    User toEntity(UserRegistrationRequestDto dto);
 }
