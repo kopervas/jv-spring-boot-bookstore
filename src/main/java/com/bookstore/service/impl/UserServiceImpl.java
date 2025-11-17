@@ -26,6 +26,7 @@ public class UserServiceImpl  implements UserService {
         }
 
         User user = userMapper.toEntity(requestDto);
+        user.setPassword(requestDto.getPassword());
 
         userRepository.save(user);
         return userMapper.toUserResponse(user);
