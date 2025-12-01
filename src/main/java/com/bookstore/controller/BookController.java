@@ -14,12 +14,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Tag(name = "Product management", description = "Endpoints for managing products")
 @RequiredArgsConstructor
-@RestController
+//@HomeController
 @RequestMapping("/books")
 public class BookController {
     private final BookService bookService;
