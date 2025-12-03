@@ -9,13 +9,14 @@ import com.bookstore.model.User;
 import com.bookstore.repository.RoleRepository;
 import com.bookstore.repository.UserRepository;
 import com.bookstore.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Set;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl  implements UserService {
     private final UserRepository userRepository;
@@ -35,7 +36,8 @@ public class UserServiceImpl  implements UserService {
         user.setPassword(passwordEncoder.encode(requestDto.getPassword()));
 
         Role roleUser = roleRepository.findByRole(Role.RoleName.USER)
-                .orElseThrow(() -> new RegistrationException("Default role USER not found"));
+                .orElseThrow(() -> new RegistrationException("Default role "
+                        + Role.RoleName.USER + " not found"));
 
         user.setRoles(Set.of(roleUser));
 

@@ -18,7 +18,7 @@ import java.util.List;
 
 @Tag(name = "Product management", description = "Endpoints for managing products")
 @RequiredArgsConstructor
-//@HomeController
+@RestController
 @RequestMapping("/books")
 public class BookController {
     private final BookService bookService;
