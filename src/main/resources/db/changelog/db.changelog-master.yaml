@@ -13,5 +13,3 @@ databaseChangeLog:
       file: db/changelog/changes/set-default-role-to-users.yaml
   - include:
       file: db/changelog/changes/insert-users.yaml
-  - include:
-      file: db/changelog/changes/assign-roles-to-users.yaml

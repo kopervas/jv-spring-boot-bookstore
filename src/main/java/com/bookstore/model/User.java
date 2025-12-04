@@ -2,7 +2,6 @@ package com.bookstore.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -49,10 +48,8 @@ public class User implements UserDetails {
 
     private String shippingAddress;
 
-    //@Column(name = "is_deleted", nullable = false, columnDefinition = "TINYINT(1)")
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     public boolean isDeleted = false;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
