@@ -1,8 +1,11 @@
 package com.bookstore.controller;
 
+import com.bookstore.dto.UserLoginRequestDto;
+import com.bookstore.dto.UserLoginResponseDto;
 import com.bookstore.dto.UserRegistrationRequestDto;
 import com.bookstore.dto.UserResponseDto;
 import com.bookstore.exception.RegistrationException;
+import com.bookstore.service.AuthenticationService;
 import com.bookstore.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +24,12 @@ import jakarta.validation.Valid;
 @Validated
 public class AuthenticationController {
     private final UserService userService;
+    private final AuthenticationService authenticationService;
+
+    @PostMapping("/login")
+    public UserLoginResponseDto login(@RequestBody UserLoginRequestDto requestDto) {
+        return authenticationService.authenticate(requestDto);
+    }
 
     @PostMapping("/registration")
     @ResponseStatus(HttpStatus.CREATED)
