@@ -8,6 +8,10 @@ import com.bookstore.exception.RegistrationException;
 import com.bookstore.service.AuthenticationService;
 import com.bookstore.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -22,12 +26,27 @@ import jakarta.validation.Valid;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 @Validated
+@Tag(name = "Authentication", description = "Endpoints for user authentication")
 public class AuthenticationController {
     private final UserService userService;
     private final AuthenticationService authenticationService;
 
     @PostMapping("/login")
-    public UserLoginResponseDto login(@RequestBody UserLoginRequestDto requestDto) {
+    @Operation(
+            summary = "Authenticate user",
+            description = "Authenticates a user with email and password and returns a JWT token"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "User successfully authenticated",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = UserLoginResponseDto.class))
+    )
+    @ApiResponse(
+            responseCode = "401",
+            description = "Invalid credentials"
+    )
+    public UserLoginResponseDto login(@RequestBody @Valid UserLoginRequestDto requestDto) {
         return authenticationService.authenticate(requestDto);
     }
 
