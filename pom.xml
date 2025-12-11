@@ -16,7 +16,7 @@
     <url/>
 
     <properties>
-        <java.version>18</java.version>
+        <java.version>17</java.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <lombok.version>1.18.38</lombok.version>
