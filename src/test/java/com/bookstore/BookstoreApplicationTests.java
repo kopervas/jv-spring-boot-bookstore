@@ -9,5 +9,17 @@ class BookstoreApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }
+
+/*@SpringBootTest(properties = {
+        "jwt.secret=hellomates1234567890asdfghjklwertyuisdsdsdsdsd",
+        "jwt.expiration=300000",
+        "server.servlet.context-path=/api"
+})
+class BookstoreApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}*/
